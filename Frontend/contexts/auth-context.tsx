@@ -8,14 +8,14 @@ export interface AuthContextType {
   user: User | null
   isLoading: boolean
   isAuthenticated: boolean
-  login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>
+  login: (email: string, password: string, redirectTo?: string) => Promise<{ success: boolean; error?: string }>
   signup: (userData: {
     name: string
     email: string
     password: string
     dateOfBirth?: string
-  }) => Promise<{ success: boolean; error?: string }>
-  loginWithOAuth: (provider: 'google' | 'facebook' | 'github') => Promise<{ success: boolean; error?: string }>
+  }, redirectTo?: string) => Promise<{ success: boolean; error?: string }>
+  loginWithOAuth: (provider: 'google' | 'facebook' | 'github', redirectTo?: string) => Promise<{ success: boolean; error?: string }>
   logout: () => Promise<void>
   refreshUser: () => Promise<void>
 }
@@ -67,7 +67,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
-  const login = async (email: string, password: string) => {
+  const login = async (email: string, password: string, redirectTo?: string) => {
     try {
       setIsLoading(true)
       const response = await authApi.login({ email, password })
@@ -75,7 +75,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
       if (response.success) {
         tokenUtils.setToken(response.data.accessToken)
         setUser(response.data.user)
-        router.push('/dashboard')
+        
+        // Redirect to the requested page or default to demo
+        const targetPath = redirectTo || '/demo'
+        router.push(targetPath)
         return { success: true }
       } else {
         return { success: false, error: response.message }
@@ -93,7 +96,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     email: string
     password: string
     dateOfBirth?: string
-  }) => {
+  }, redirectTo?: string) => {
     try {
       setIsLoading(true)
       const response = await authApi.signup(userData)
@@ -101,7 +104,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
       if (response.success) {
         tokenUtils.setToken(response.data.accessToken)
         setUser(response.data.user)
-        router.push('/dashboard')
+        
+        // Redirect to the requested page or default to demo
+        const targetPath = redirectTo || '/demo'
+        router.push(targetPath)
         return { success: true }
       } else {
         return { success: false, error: response.message }
@@ -114,9 +120,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
-  const loginWithOAuth = async (provider: 'google' | 'facebook' | 'github') => {
+  const loginWithOAuth = async (provider: 'google' | 'facebook' | 'github', redirectTo?: string) => {
     try {
       setIsLoading(true)
+      
+      // Store the redirect path in localStorage for after OAuth completion
+      if (redirectTo) {
+        localStorage.setItem('oauth_redirect', redirectTo)
+      }
+      
       const result = await oauthApi.initiateOAuth(provider)
       
       if (result.success && result.data) {
@@ -145,7 +157,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
     } finally {
       tokenUtils.removeToken()
       setUser(null)
-      router.push('/login')
+      
+      // Clear any stored redirect paths
+      localStorage.removeItem('oauth_redirect')
+      
+      // Redirect to home page instead of login
+      router.push('/')
     }
   }
 

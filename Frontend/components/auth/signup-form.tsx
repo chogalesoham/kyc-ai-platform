@@ -1,11 +1,11 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
@@ -30,8 +30,18 @@ type SignupFormData = z.infer<typeof signupSchema>
 export function SignupForm() {
   const { signup, loginWithOAuth, isLoading } = useAuth()
   const router = useRouter()
+  const searchParams = useSearchParams()
   const [formError, setFormError] = useState<string>('')
   const [oauthLoading, setOauthLoading] = useState<string>('')
+  const [redirectTo, setRedirectTo] = useState<string>('')
+
+  // Get redirect parameter from URL
+  useEffect(() => {
+    const redirect = searchParams.get('redirect')
+    if (redirect) {
+      setRedirectTo(decodeURIComponent(redirect))
+    }
+  }, [searchParams])
 
   const {
     register,
@@ -44,11 +54,9 @@ export function SignupForm() {
   const onSubmit = async (data: SignupFormData) => {
     setFormError('')
     const { confirmPassword, ...signupData } = data
-    const result = await signup(signupData)
+    const result = await signup(signupData, redirectTo)
     
-    if (result.success) {
-      router.push('/')
-    } else {
+    if (!result.success) {
       setFormError(result.error || 'Registration failed')
     }
   }
@@ -57,7 +65,7 @@ export function SignupForm() {
     setOauthLoading(provider)
     setFormError('')
     
-    const result = await loginWithOAuth(provider)
+    const result = await loginWithOAuth(provider, redirectTo)
     if (!result.success) {
       if (result.error?.includes('ECONNREFUSED') || result.error?.includes('Network Error')) {
         setFormError(`${provider.charAt(0).toUpperCase() + provider.slice(1)} signup is not configured yet. Please use email/password registration.`)

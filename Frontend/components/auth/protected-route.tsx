@@ -1,24 +1,37 @@
 "use client"
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAuth } from '@/contexts/auth-context'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import { LoadingSpinner } from '@/components/ui/loading-spinner'
 
 interface ProtectedRouteProps {
   children: React.ReactNode
   redirectTo?: string
+  showMessage?: boolean
 }
 
-export function ProtectedRoute({ children, redirectTo = '/login' }: ProtectedRouteProps) {
+export function ProtectedRoute({ children, redirectTo = '/login', showMessage = true }: ProtectedRouteProps) {
   const { isAuthenticated, isLoading } = useAuth()
   const router = useRouter()
+  const pathname = usePathname()
+  const [hasRedirected, setHasRedirected] = useState(false)
 
   useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
-      router.replace(redirectTo)
+    if (!isLoading && !isAuthenticated && !hasRedirected) {
+      setHasRedirected(true)
+      
+      // Show notification message before redirect
+      if (showMessage) {
+        // You could implement a toast notification here
+        console.log('Please log in to access this page')
+      }
+      
+      // Construct redirect URL with current path as parameter
+      const redirectUrl = `${redirectTo}?redirect=${encodeURIComponent(pathname)}`
+      router.replace(redirectUrl)
     }
-  }, [isAuthenticated, isLoading, router, redirectTo])
+  }, [isAuthenticated, isLoading, router, redirectTo, pathname, showMessage, hasRedirected])
 
   if (isLoading) {
     return (

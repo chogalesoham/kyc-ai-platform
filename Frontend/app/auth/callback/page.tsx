@@ -31,8 +31,13 @@ export default function AuthCallbackPage() {
           // Refresh user data
           await refreshUser()
           
-          // Redirect to home page
-          router.push('/')
+          // Check for stored redirect path
+          const redirectPath = localStorage.getItem('oauth_redirect')
+          localStorage.removeItem('oauth_redirect')
+          
+          // Redirect to the requested page or default to demo
+          const targetPath = redirectPath || '/demo'
+          router.push(targetPath)
         } catch (error) {
           console.error('OAuth callback error:', error)
           router.push('/login?error=oauth_error')

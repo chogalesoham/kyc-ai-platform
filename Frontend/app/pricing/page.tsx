@@ -7,6 +7,7 @@ import { useRef, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch'
 import Link from 'next/link'
+import { ProtectedRoute } from '@/components/auth/protected-route'
 
 const pricingPlans = [
   {
@@ -238,6 +239,14 @@ function PricingCard({ plan, index, isAnnual }: { plan: typeof pricingPlans[0], 
 }
 
 export default function PricingPage() {
+  return (
+    <ProtectedRoute>
+      <PricingContent />
+    </ProtectedRoute>
+  )
+}
+
+function PricingContent() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
   const [isAnnual, setIsAnnual] = useState(false)

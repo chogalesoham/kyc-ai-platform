@@ -24,6 +24,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card } from '@/components/ui/card'
 import { useInView } from 'framer-motion'
+import { ProtectedRoute } from '@/components/auth/protected-route'
 
 type VerificationStatus = 'idle' | 'uploading' | 'processing' | 'verified' | 'rejected'
 
@@ -70,6 +71,14 @@ const benefits = [
 ]
 
 export default function KYCDemoPage() {
+  return (
+    <ProtectedRoute>
+      <KYCDemoContent />
+    </ProtectedRoute>
+  )
+}
+
+function KYCDemoContent() {
   const [formData, setFormData] = useState<FormData>({
     fullName: '',
     email: '',

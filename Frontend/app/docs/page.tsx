@@ -9,8 +9,17 @@ import InstallationSection from "@/components/docs/installation-section"
 import APIReferenceSection from "@/components/docs/api-reference-section"
 import CustomizationSection from "@/components/docs/customization-section"
 import FAQSection from "@/components/docs/faq-section"
+import { ProtectedRoute } from "@/components/auth/protected-route"
 
 export default function DocsPage() {
+  return (
+    <ProtectedRoute>
+      <DocsContent />
+    </ProtectedRoute>
+  )
+}
+
+function DocsContent() {
   const [activeSection, setActiveSection] = useState("introduction")
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
