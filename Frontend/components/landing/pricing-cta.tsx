@@ -12,19 +12,19 @@ const highlights = [
     icon: Zap,
     title: 'Lightning Fast',
     description: 'Process documents in under 3 seconds',
-    color: 'from-blue-500 to-cyan-500'
+    color: 'from-blue-500 to-blue-600'
   },
   {
     icon: Shield,
     title: 'Bank-Grade Security',
     description: 'SOC 2 compliant with end-to-end encryption',
-    color: 'from-green-500 to-emerald-500'
+    color: 'from-blue-600 to-blue-700'
   },
   {
     icon: TrendingUp,
     title: 'Scalable Solutions',
     description: 'From startups to enterprise-level processing',
-    color: 'from-purple-500 to-pink-500'
+    color: 'from-blue-400 to-blue-500'
   }
 ]
 
@@ -37,7 +37,7 @@ export default function PricingCTA() {
       {/* Background Elements */}
       <div className="absolute inset-0 bg-grid-white/[0.02] bg-grid-pattern" />
       <div className="absolute top-1/2 left-0 w-96 h-96 bg-gradient-to-r from-primary/5 to-transparent rounded-full blur-3xl" />
-      <div className="absolute top-1/2 right-0 w-96 h-96 bg-gradient-to-l from-purple-500/5 to-transparent rounded-full blur-3xl" />
+      <div className="absolute top-1/2 right-0 w-96 h-96 bg-gradient-to-l from-blue-500/5 to-transparent rounded-full blur-3xl" />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-6xl mx-auto">

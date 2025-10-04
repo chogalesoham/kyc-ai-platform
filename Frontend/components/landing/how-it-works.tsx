@@ -11,7 +11,7 @@ const steps = [
     icon: Upload,
     title: 'Upload Documents',
     description: 'Simply upload your identity documents through our secure platform. We support all major document types including passports, driver\'s licenses, and ID cards.',
-    color: 'from-blue-500 to-cyan-500',
+    color: 'from-blue-500 to-blue-600',
     bgColor: 'bg-blue-500/10',
     borderColor: 'border-blue-500/20'
   },
@@ -20,27 +20,27 @@ const steps = [
     icon: Search,
     title: 'AI Analysis',
     description: 'Our advanced AI powered by GenAI instantly analyzes your documents for authenticity, extracting key information with 99.9% accuracy.',
-    color: 'from-purple-500 to-pink-500',
-    bgColor: 'bg-purple-500/10',
-    borderColor: 'border-purple-500/20'
+    color: 'from-blue-600 to-blue-700',
+    bgColor: 'bg-blue-600/10',
+    borderColor: 'border-blue-600/20'
   },
   {
     id: 3,
     icon: Shield,
     title: 'Security Verification',
     description: 'Multi-layer security checks ensure document authenticity while maintaining bank-grade encryption for your sensitive data.',
-    color: 'from-orange-500 to-red-500',
-    bgColor: 'bg-orange-500/10',
-    borderColor: 'border-orange-500/20'
+    color: 'from-blue-700 to-blue-800',
+    bgColor: 'bg-blue-700/10',
+    borderColor: 'border-blue-700/20'
   },
   {
     id: 4,
     icon: CheckCircle,
     title: 'Instant Results',
     description: 'Get real-time verification results with detailed compliance reports. Integration-ready APIs for seamless workflow automation.',
-    color: 'from-green-500 to-emerald-500',
-    bgColor: 'bg-green-500/10',
-    borderColor: 'border-green-500/20'
+    color: 'from-blue-400 to-blue-500',
+    bgColor: 'bg-blue-400/10',
+    borderColor: 'border-blue-400/20'
   }
 ]
 
@@ -69,7 +69,7 @@ function StepCard({ step, index }: { step: typeof steps[0], index: number }) {
 
       <div className={`relative p-8 rounded-2xl border ${step.borderColor} ${step.bgColor} backdrop-blur-sm transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl group-hover:shadow-primary/20`}>
         {/* Step Number */}
-        <div className="absolute -top-4 -left-4 w-12 h-12 rounded-full bg-gradient-to-r from-primary to-purple-600 flex items-center justify-center text-white font-bold text-lg shadow-lg">
+        <div className="absolute -top-4 -left-4 w-12 h-12 rounded-full bg-gradient-to-r from-primary to-blue-600 flex items-center justify-center text-white font-bold text-lg shadow-lg">
           {step.id}
         </div>
 

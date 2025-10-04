@@ -38,28 +38,28 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
 
-  /* Brand palette (hex OK with CSS vars) */
-  --brand-primary: #2563eb; /* blue-600 */
-  --brand-secondary: #0f172a; /* slate-900 */
-  --brand-green: #22c55e; /* green-500 */
-  --brand-orange: #f97316; /* orange-500 */
+  /* Brand palette (hex OK with CSS vars) - Updated to match ezto blue theme */
+  --brand-primary: #3b82f6; /* blue-500 - main blue from ezto */
+  --brand-secondary: #1e40af; /* blue-700 - darker blue */
+  --brand-light-blue: #60a5fa; /* blue-400 - lighter blue for accents */
+  --brand-bg-blue: #eff6ff; /* blue-50 - very light blue background */
 
-  /* Override key design tokens to align with brand */
+  /* Override key design tokens to align with blue brand */
   --primary: var(--brand-primary);
-  --secondary: color-mix(in oklab, var(--brand-secondary) 90%, white);
-  --accent: var(--brand-green);
+  --secondary: var(--brand-secondary);
+  --accent: var(--brand-light-blue);
 
-  /* Risk levels */
-  --risk-low: var(--brand-green);
-  --risk-medium: var(--brand-orange);
-  --risk-high: #ef4444; /* red-500 */
+  /* Risk levels - Updated to blue theme */
+  --risk-low: #10b981; /* emerald-500 - keep green for success */
+  --risk-medium: #f59e0b; /* amber-500 - keep amber for warning */
+  --risk-high: #ef4444; /* red-500 - keep red for danger */
 
-  /* Chart colors aligned to brand */
+  /* Chart colors aligned to blue brand */
   --chart-1: var(--brand-primary);
-  --chart-2: var(--brand-green);
-  --chart-3: var(--brand-orange);
+  --chart-2: var(--brand-light-blue);
+  --chart-3: var(--brand-secondary);
   --chart-4: #0ea5e9; /* sky-500 */
-  --chart-5: #a78bfa; /* violet-400 (used sparingly, not prominent) */
+  --chart-5: #6366f1; /* indigo-500 - complementary to blue theme */
 }
 
 .dark {
@@ -99,7 +99,7 @@
   /* Keep brand consistent in dark; adjust surfaces via background/foreground tokens already set */
   --primary: var(--brand-primary);
   --secondary: var(--brand-secondary);
-  --accent: var(--brand-green);
+  --accent: var(--brand-light-blue);
 }
 
 @theme inline {
@@ -162,7 +162,7 @@
     @apply bg-card/80 dark:bg-card/60 backdrop-blur-md border border-border/50 shadow-sm;
   }
   .btn-gradient {
-    background-image: linear-gradient(135deg, var(--brand-primary), var(--brand-green));
+    background-image: linear-gradient(135deg, var(--brand-primary), var(--brand-light-blue));
     transition: filter 150ms ease, transform 150ms ease;
   }
   .btn-gradient:hover {

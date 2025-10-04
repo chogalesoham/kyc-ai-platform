@@ -29,7 +29,7 @@ const services = [
       'Instant verification results',
       'Sample document library'
     ],
-    color: 'from-blue-500 to-cyan-500',
+    color: 'from-blue-500 to-blue-600',
     bgColor: 'bg-blue-500/5',
     borderColor: 'border-blue-500/20',
     ctaText: 'Try Demo',
@@ -47,9 +47,9 @@ const services = [
       'Webhook notifications',
       'Comprehensive documentation'
     ],
-    color: 'from-purple-500 to-pink-500',
-    bgColor: 'bg-purple-500/5',
-    borderColor: 'border-purple-500/20',
+    color: 'from-blue-600 to-blue-700',
+    bgColor: 'bg-blue-600/5',
+    borderColor: 'border-blue-600/20',
     ctaText: 'View Docs',
     badge: 'Developer Ready'
   },
@@ -65,9 +65,9 @@ const services = [
       'Automated verification',
       'Multi-language support'
     ],
-    color: 'from-green-500 to-emerald-500',
-    bgColor: 'bg-green-500/5',
-    borderColor: 'border-green-500/20',
+    color: 'from-blue-400 to-blue-500',
+    bgColor: 'bg-blue-400/5',
+    borderColor: 'border-blue-400/20',
     ctaText: 'Start Bot',
     badge: 'Popular'
   },
@@ -83,9 +83,9 @@ const services = [
       'Compliance templates',
       'Workflow automation'
     ],
-    color: 'from-orange-500 to-red-500',
-    bgColor: 'bg-orange-500/5',
-    borderColor: 'border-orange-500/20',
+    color: 'from-blue-700 to-blue-800',
+    bgColor: 'bg-blue-700/5',
+    borderColor: 'border-blue-700/20',
     ctaText: 'Create Flow',
     badge: 'Enterprise'
   }
