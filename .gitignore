@@ -286,7 +286,6 @@ cython_debug/
 *.tflite
 *.pt
 *.pth
-models/
 checkpoints/
 weights/
 data/raw/
